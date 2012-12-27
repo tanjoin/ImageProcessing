@@ -79,3 +79,103 @@ OpenCVを使った画像処理プログラム集
         //#pragma comment(lib,"opencv_legacy231.lib")  
         //#pragma comment(lib,"opencv_gpu231.lib")  
     #endif  
+
+
+OpenCV-waitKey-with-cursor-key
+==============================
+
+cv::waitkeyを使いやすくした 
+(主にenumを作成)
+
+
+    #include <iostream>
+    
+    #include "opencv_waitkey_with_cursor_key.h"
+    
+    int main(void){
+    
+      cv::Mat img = cv::imread("sample.jpg", cv::IMREAD_UNCHANGED);
+      
+      while(true) {
+    
+        cv::imshow("img", img);
+        std::cout << 
+          OpenCVWaitKeyWithCursorKey::inputToString(OpenCVWaitKeyWithCursorKey::waitKey(0))
+        << std::endl;
+    
+      }
+    
+      return 0;
+    }
+    
+
+足りない所はpull request
+
+
+
+OpenCV-Resize
+=============
+
+画像サイズを変更する。  
+
+-バイリニア補間
+bilinear
+-バイキュービック補間
+bi_cubic
+-Lanczos法の補間
+lanczos4
+
+サンプルコード
+    
+    #include "opencv_resize.h"
+    
+    int main(void) {
+      
+      return 0;
+    }
+        
+
+
+
+OpenCV-PNG-image-with-Silhouette
+===========================================
+  
+OpenCVを使った透明度有りPNG画像作成プログラム  
+  
+サンプルコード  
+
+    #include "create_png_with_opencv.h"
+    
+    int main(void) {
+    
+      OpenCVPNGImageWithSilhouette cpng("capture.jpg", "silhouette.jpg");
+      cpng.show();
+      cpng.write("dst2.png", true);
+      cpng.show();
+    
+      return 0;
+    }
+    
+
+HistogramWithOpenCV  
+===================  
+  
+OpenCVを使ってヒストグラムを生成  
+  
+  
+サンプルコード
+
+    
+    #include "opencv_histogram.h"
+    
+    int main(void) {
+      cv::Mat src = cv::imread("src.png", cv::IMREAD_UNCHANGED);
+      OpenCVHistogram hist(src);
+      hist.CreateHistogram();
+      hist.write("dst.png");
+      cv::Mat dst = hist.histogram_image();
+      cv::imshow("背景ヒストグラム", dst);
+      cv::waitKey(0);
+      return 0;
+    }
+
